@@ -51,6 +51,22 @@ var selectionModel = {
         return this.list.indexOf(icecream) >= 0;
     },
 
+    //IDで指定したアイスクリームが選択されていればtrueが返す。
+    containById: function(id){
+        return this.contain(icecreamModel.findById(id));
+    },
+
+    //選択されているアイスクリームを返す。
+    getIcecreams: function(){
+        return this.list;
+    },
+
+    //viewを更新する。
+    updateView: function(){
+        //viewを更新する。
+
+    }
+
 
 
 
