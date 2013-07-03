@@ -16,7 +16,11 @@
 
 <script>
 $(function(){
-    console.log(icecreamModel.findById('t1'));
+    var ice = icecreamModel.findById('t2');
+    //iceのリストを追加する。
+    selectionModel.add(ice);
+
+    console.log(selectionModel.contain(ice));
 
 
 

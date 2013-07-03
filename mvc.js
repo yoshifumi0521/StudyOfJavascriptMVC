@@ -24,7 +24,38 @@ var icecreamModel = {
 };
 
 //選択されているアイスクリームの管理
+var selectionModel = {
+    //選択されているアイスクリームが入る。
+    list: [],
 
+    //アイスクリームの最大数
+    icecreamNumber: 2,
+
+    //listにアイスクリームを追加する。
+    add: function(item){
+        var list  = this.list;
+        //listにいれる。
+        list.push(item);
+        //icecreamNumber以上に追加した場合
+        if(list.length > this.icecreamNumber){
+            //listの0番目を捨てる。
+            list.shift();
+        }
+        //ビューを更新する。
+        // this.updateView();
+    },
+
+    //指定したアイスクリームが選択されていればtrueを返す。
+    contain: function(icecream){
+        //配列にはいっているか？を見る。
+        return this.list.indexOf(icecream) >= 0;
+    },
+
+
+
+
+
+};
 
 
 
