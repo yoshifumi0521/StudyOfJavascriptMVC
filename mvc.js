@@ -71,6 +71,38 @@ var selectionModel = {
 };
 
 
+//viewに書き込む。
+$(function(){
+    var els = $('#icecreams');
+    //配列をくり返す。ループ処理。$.eachはループ。
+    $.each(icecreamModel.getAll(),
+        function(i,icecream){
+            //$('#icecreams')に追加していく。
+            els.append(
+                //<li></li>を追加する。
+                $("<li>")
+                    .append($("<input type='checkbox'>")
+                        .attr('name',icecream.id))
+                        .append($('<span>')
+                            .text(icecream.name))
+                    //クリックイベントを追加する。
+                    .click(function(){
+                        //コントローラーを書く。
+                        console.log('クリックイベント');
+                    })
+            );
+        }
+
+
+
+    );
+
+
+
+
+
+
+})
 
 //ここにテストを書く。
 //簡単なテストチェック関数。expectが期待値、valueは実際の値。
@@ -117,7 +149,7 @@ function testModels(){
 
 }
 
-testModels();
+// testModels();
 
 
 
