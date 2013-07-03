@@ -5,10 +5,10 @@ var icecreamModel = {
     list: [
         {id: 't1',name: 'バニラ'},
         {id: 't2',name: 'チョコレートチップ'},
-        {id: 't2',name: 'オレンジシャーベット'},
-        {id: 't2',name: 'チョコミント'},
-        {id: 't2',name: 'ストロベリー'},
-        {id: 't2',name: '抹茶'}
+        {id: 't3',name: 'オレンジシャーベット'},
+        {id: 't4',name: 'チョコミント'},
+        {id: 't5',name: 'ストロベリー'},
+        {id: 't6',name: '抹茶'}
     ],
     //すべてのアイスクリームを返す。
     getAll: function(){
@@ -42,7 +42,7 @@ var selectionModel = {
             list.shift();
         }
         //ビューを更新する。
-        // this.updateView();
+        this.updateView();
     },
 
     //指定したアイスクリームが選択されていればtrueを返す。
@@ -68,13 +68,56 @@ var selectionModel = {
     }
 
 
-
-
-
 };
 
 
 
+//ここにテストを書く。
+//簡単なテストチェック関数。expectが期待値、valueは実際の値。
+function ok(title,expect,value){
+    if(expect === value){
+        //テストが通ったとき
+        console.log("OK : " + title);
+    }else{
+        //テストが通らなかったとき
+        console.log("NG : " + title + "[" + expect + "] -> [" + value + "]");
+    }
+}
+
+//テスト内容
+function testModels(){
+    var all = icecreamModel.getAll();
+    var icecreamNumber = selectionModel.icecreamNumber;
+
+    ok("icecreamModel:個数",all.length,6);
+    ok("icecreamModel.findById",icecreamModel.findById('t4'),all[3]);
+
+    //登録してない場合
+    ok("selectionModel:最初の個数",selectionModel.getIcecreams().length,0);
+    ok("selectionModel.contain:空の場合",false,selectionModel.contain(all[0]));
+
+    //1つ追加
+    selectionModel.add(all[0]);
+    ok("selectionModel:1つ目を追加したときの個数",selectionModel.getIcecreams().length,1);
+    ok("selectionModel:1つ目を追加したときのチェック",true,selectionModel.contain(all[0]));
+
+    //2つ追加
+    selectionModel.add(all[1]);
+    ok("selectionModel:2つ目を追加したときの個数",selectionModel.getIcecreams().length,2);
+    ok("selectionModel:2つ目を追加したときのチェック",true,selectionModel.contain(all[1]));
+
+    //3つを追加
+    selectionModel.add(all[2]);
+    //個数は2つ。
+    ok("selectionModel:3つ目を追加したときの個数",selectionModel.getIcecreams().length,icecreamNumber);
+    ok("selectionModel:3つ目を追加したときのチェック",true,selectionModel.contain(all[2]));
+    //最初のものは消える。
+    ok("selectionModel:2つ目を追加したときのチェック",false,selectionModel.contain(all[0]));
+
+
+}
+
+testModels();
 
 
 
