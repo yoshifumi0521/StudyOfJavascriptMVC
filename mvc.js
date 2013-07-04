@@ -23,6 +23,7 @@ var icecreamModel = {
     }
 };
 
+
 //選択されているアイスクリームの管理
 var selectionModel = {
     //選択されているアイスクリームが入る。
@@ -64,12 +65,41 @@ var selectionModel = {
     //viewを更新する。
     updateView: function(){
         //viewを更新する。
-
+        console.log('更新');
+        //チェックボックスを更新する。
+        updateSelection();
+        //選択順序を更新する。
+        updateIcecreamList();
     }
 
 
 };
 
+//チェックボックスを更新するメソッド
+function updateSelection(){
+    $("#icecreams input[type='checkbox']").each(function(i,elm){
+        //選択されていたらチェックボタンをつける。idで判定する。
+        elm.checked = selectionModel.containById(elm.id);
+    });
+}
+
+//選択順序を更新するメソッド
+function updateIcecreamList(){
+    $('#icecream-list').text(
+        $.map(selectionModel.getIcecreams(),function(val){
+            return val.name;
+        }).join(" > ")
+    );
+}
+
+//チェックボックスをクリックしたときの処理
+function onclickIcecream(){
+    var checkbox = $(event.currentTarget).find("input[type='checkbox']");
+    if(checkbox){
+        selectionModel.add(icecreamModel.findById(checkbox.attr("name")));
+    }
+
+}
 
 //viewに書き込む。
 $(function(){
@@ -88,19 +118,14 @@ $(function(){
                     //クリックイベントを追加する。
                     .click(function(){
                         //コントローラーを書く。
-                        console.log('クリックイベント');
+                        //チェックボックスをクリックしたときのメソッド
+                        onclickIcecream();
                     })
             );
         }
-
-
-
     );
-
-
-
-
-
+    //チェックボックスを更新する。
+    selectionModel.updateView();
 
 })
 
