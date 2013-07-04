@@ -1,4 +1,5 @@
 
+// モデル
 //アイスクリーム一覧
 var icecreamModel = {
     //アイスクリームのリストをいれる。
@@ -62,6 +63,12 @@ var selectionModel = {
         return this.list;
     },
 
+    //クリアする。
+    clear: function(){
+        this.list= [];
+        this.updateView();
+    },
+
     //viewを更新する。
     updateView: function(){
         //viewを更新する。
@@ -92,6 +99,8 @@ function updateIcecreamList(){
     );
 }
 
+
+// コントローラー
 //チェックボックスをクリックしたときの処理
 function onclickIcecream(){
     var checkbox = $(event.currentTarget).find("input[type='checkbox']");
@@ -100,6 +109,12 @@ function onclickIcecream(){
     }
 
 }
+
+//クリアボタンをクリックしたときの処理。
+function onclickClearButton(){
+    selectionModel.clear();
+}
+
 
 //viewに書き込む。
 $(function(){
